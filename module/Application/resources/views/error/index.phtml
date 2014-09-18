@@ -1,0 +1,14 @@
+<h1>An error occurred</h1>
+
+<h3>Message:</h3>
+<?= $this->exception->getMessage(); ?>
+<br/>
+<br/>
+
+<h3>Stack trace:</h3>
+<pre>
+<?= $this->exception->getTraceAsString(); ?>
+</pre>
+
+<h3>Error code:</h3>
+<?= $this->exception->getCode() ?>
