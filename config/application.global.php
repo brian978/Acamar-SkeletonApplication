@@ -18,7 +18,7 @@ return array(
         'route' => array(
             'module' => 'Application',
             'controller' => 'error',
-            'action' => 'error'
+            'action' => 'index'
         )
     )
 );
