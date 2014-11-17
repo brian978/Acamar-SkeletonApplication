@@ -7,6 +7,7 @@
  * @license Creative Commons Attribution-ShareAlike 3.0
  */
 
+use Acamar\Loader\PSR0Autoloader;
 use SlimMvc\Mvc\Application;
 
 chdir(dirname(__DIR__));
@@ -19,11 +20,25 @@ error_reporting(E_ALL);
  * Loading our initial files
  * ----------------------------------------
  */
-$acamarPath = realpath(getenv('ACAMAR_PATH'));
+$acamarPath  = realpath(getenv('ACAMAR_PATH'));
 $slimMvcPath = realpath(getenv('SLIM_MVC_PATH'));
 
-require_once $slimMvcPath . '/SlimMvc/Mvc/Application.php';
 require_once $acamarPath . '/Acamar/Loader/PSR0Autoloader.php';
+
+/**
+ * ----------------------------------------
+ * Configuring the autoloader
+ * ----------------------------------------
+ */
+// We need the autoloader as soon as possible
+$autoloader = new PSR0Autoloader();
+$autoloader->registerNamespaces([
+    'SlimMvc' => $slimMvcPath,
+    'Acamar' => $acamarPath,
+    'Slim' => getenv('SLIM_PATH')
+]);
+
+$autoloader->register();
 
 /**
  * ----------------------------------------
@@ -31,17 +46,7 @@ require_once $acamarPath . '/Acamar/Loader/PSR0Autoloader.php';
  * ----------------------------------------
  */
 $app = new Application(getenv("APPLICATION_ENV") || Application::ENV_PRODUCTION);
-
-/**
- * ----------------------------------------
- * Configuring the autoloader
- * ----------------------------------------
- */
-$app->getAutoloader()->registerNamespaces([
-    'SlimMvc' => $slimMvcPath,
-    'Acamar' => $acamarPath,
-    'Slim' => getenv('SLIM_PATH')
-]);
+$app->setAutoloader($autoloader);
 
 /**
  * ----------------------------------------
