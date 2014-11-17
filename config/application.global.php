@@ -13,12 +13,5 @@ return array(
     'independentModules' => false,
     'modules' => array(
         'Application'
-    ),
-    'errorHandler' => array(
-        'route' => array(
-            'module' => 'Application',
-            'controller' => 'error',
-            'action' => 'index'
-        )
     )
 );

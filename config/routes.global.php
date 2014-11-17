@@ -17,6 +17,14 @@ return array(
                 'action' => 'index'
             )
         ),
+        'error' => array(
+            'pattern' => '/error',
+            'specs' => array(
+                'module' => 'Application',
+                'controller' => 'error',
+                'action' => 'index'
+            )
+        ),
         'mvc' => array(
             'pattern' => '/:controller(/:action)',
             'specs' => array(
