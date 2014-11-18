@@ -11,7 +11,7 @@ return array(
     'routes' => array(
         'home' => array(
             'pattern' => '/',
-            'specs' => array(
+            'defaults' => array(
                 'module' => 'Application',
                 'controller' => 'index',
                 'action' => 'index'
@@ -19,7 +19,7 @@ return array(
         ),
         'error' => array(
             'pattern' => '/error',
-            'specs' => array(
+            'defaults' => array(
                 'module' => 'Application',
                 'controller' => 'error',
                 'action' => 'index'
@@ -27,7 +27,7 @@ return array(
         ),
         'mvc' => array(
             'pattern' => '/:controller(/:action)',
-            'specs' => array(
+            'defaults' => array(
                 'module' => 'Application'
             )
         )
