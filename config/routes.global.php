@@ -15,7 +15,12 @@ return array(
                 'module' => 'Application',
                 'controller' => 'index',
                 'action' => 'index'
-            )
+            ),
+            'options' => array(
+                'acceptedHttpMethods' => array(
+                    'GET'
+                )
+            ),
         ),
         'error' => array(
             'pattern' => '/error',
