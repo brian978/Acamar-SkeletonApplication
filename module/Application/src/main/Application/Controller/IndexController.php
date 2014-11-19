@@ -9,7 +9,7 @@
 
 namespace Application\Controller;
 
-use SlimMvc\Mvc\Controller\AbstractController;
+use Acamar\Mvc\Controller\AbstractController;
 
 /**
  * Class IndexController

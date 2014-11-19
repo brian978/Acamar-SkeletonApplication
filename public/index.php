@@ -8,7 +8,7 @@
  */
 
 use Acamar\Loader\PSR0Autoloader;
-use SlimMvc\Mvc\Application;
+use Acamar\Mvc\Application;
 
 chdir(dirname(__DIR__));
 
@@ -21,7 +21,6 @@ error_reporting(E_ALL);
  * ----------------------------------------
  */
 $acamarPath  = realpath(getenv('ACAMAR_PATH'));
-$slimMvcPath = realpath(getenv('SLIM_MVC_PATH'));
 
 require_once $acamarPath . '/Acamar/Loader/PSR0Autoloader.php';
 
@@ -33,9 +32,7 @@ require_once $acamarPath . '/Acamar/Loader/PSR0Autoloader.php';
 // We need the autoloader as soon as possible
 $autoloader = new PSR0Autoloader();
 $autoloader->registerNamespaces([
-    'SlimMvc' => $slimMvcPath,
-    'Acamar' => $acamarPath,
-    'Slim' => getenv('SLIM_PATH')
+    'Acamar' => $acamarPath
 ]);
 
 $autoloader->register();
