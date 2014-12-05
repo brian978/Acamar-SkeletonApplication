@@ -11,7 +11,10 @@ return array(
     'baseUri' => '/',
     'modulesPath' => 'module/',
     'independentModules' => false,
-    'modules' => array(
-        'Application'
-    )
+    'modules' => [
+        'Application' => [
+            'module.config.php',
+            'routes.config.php',
+        ]
+    ]
 );

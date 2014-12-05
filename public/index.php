@@ -41,12 +41,18 @@ $autoloader->register();
 
 /**
  * ----------------------------------------
- * Loading the application
+ * Application environment
  * ----------------------------------------
  */
 $env = getenv("APPLICATION_ENV");
+define('APPLICATION_ENV', is_string($env) ? $env : Application::ENV_PRODUCTION);
 
-$app = new Application(is_string($env) ? $env : Application::ENV_PRODUCTION);
+/**
+ * ----------------------------------------
+ * Loading the application
+ * ----------------------------------------
+ */
+$app = new Application(APPLICATION_ENV);
 $app->setAutoloader($autoloader);
 
 /**
