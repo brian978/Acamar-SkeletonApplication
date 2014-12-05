@@ -17,5 +17,9 @@ return array(
     ],
     'modules' => [
         'Application' => []
+    ],
+    'configCache' => [
+        'enabled' => false,
+        'path' => 'cache'
     ]
 );
