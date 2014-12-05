@@ -9,12 +9,13 @@
 
 return array(
     'baseUri' => '/',
-    'modulesPath' => 'module/',
     'independentModules' => false,
+    'modulesPath' => 'module/',
+    'modulesConfigs' => [
+        'module.config.php',
+        'routes.config.php',
+    ],
     'modules' => [
-        'Application' => [
-            'module.config.php',
-            'routes.config.php',
-        ]
+        'Application' => []
     ]
 );
