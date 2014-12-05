@@ -22,7 +22,7 @@ $startTime = microtime(true);
  * Loading our initial files
  * ----------------------------------------
  */
-$acamarPath  = realpath(getenv('ACAMAR_PATH'));
+$acamarPath = realpath(getenv('ACAMAR_PATH'));
 
 require_once $acamarPath . '/Acamar/Loader/PSR0Autoloader.php';
 
@@ -44,7 +44,9 @@ $autoloader->register();
  * Loading the application
  * ----------------------------------------
  */
-$app = new Application(getenv("APPLICATION_ENV") || Application::ENV_PRODUCTION);
+$env = getenv("APPLICATION_ENV");
+
+$app = new Application(is_string($env) ? $env : Application::ENV_PRODUCTION);
 $app->setAutoloader($autoloader);
 
 /**
@@ -53,8 +55,7 @@ $app->setAutoloader($autoloader);
  * (must be done after autoloading config)
  * ----------------------------------------
  */
-$app->loadConfig()
-    ->run();
+$app->run();
 
 // Just some benchmarks to keep an eye on
 echo "<br /><br />";
