@@ -17,21 +17,26 @@ error_reporting(E_ALL);
 
 $startTime = microtime(true);
 
-/**
- * ----------------------------------------
- * Loading our initial files
- * ----------------------------------------
- */
-$acamarPath = realpath(getenv('ACAMAR_PATH'));
+// There might be an autoloader from Composer
+$loaderPath = realpath('vendor/autoload.php');
+if (file_exists($loaderPath)) {
+    $loader = include $loaderPath;
+}
 
-require_once $acamarPath . '/Acamar/Loader/PSR0Autoloader.php';
+// Getting the framework path
+$acamarPath = getenv('ACAMAR_PATH');
+if (!$acamarPath) {
+    $acamarPath = realpath('vendor/Acamar');
+}
 
 /**
  * ----------------------------------------
  * Configuring the autoloader
  * ----------------------------------------
  */
-// We need the autoloader as soon as possible
+require_once $acamarPath . '/Acamar/Loader/PSR0Autoloader.php';
+
+// We need this autoloader because the application depends on it
 $autoloader = new PSR0Autoloader();
 $autoloader->registerNamespaces([
     'Acamar' => $acamarPath
@@ -45,7 +50,7 @@ $autoloader->register();
  * ----------------------------------------
  */
 $env = getenv("APPLICATION_ENV");
-define('APPLICATION_ENV', is_string($env) ? $env : Application::ENV_PRODUCTION);
+define('APPLICATION_ENV', $env === false ? Application::ENV_PRODUCTION : $env);
 
 /**
  * ----------------------------------------
