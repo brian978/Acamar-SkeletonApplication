@@ -23,6 +23,6 @@ return array(
     ],
     'configCache' => [
         'enabled' => false,
-        'path' => 'cache'
+        'filePath' => 'cache/app.config.php'
     ]
 );
