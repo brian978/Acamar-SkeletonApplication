@@ -7,7 +7,7 @@
  * @license Creative Commons Attribution-ShareAlike 3.0
  */
 
-use Acamar\Loader\PSR0Autoloader;
+use Acamar\Loader\PSR4Autoloader;
 use Acamar\Mvc\Application;
 
 chdir(dirname(__DIR__));
@@ -26,7 +26,7 @@ if (file_exists($loaderPath)) {
 // Getting the framework path
 $acamarPath = getenv('ACAMAR_PATH');
 if (!$acamarPath) {
-    $acamarPath = realpath('vendor/Acamar');
+    $acamarPath = realpath('vendor/');
 }
 
 /**
@@ -34,12 +34,12 @@ if (!$acamarPath) {
  * Configuring the autoloader
  * ----------------------------------------
  */
-require_once $acamarPath . '/Acamar/Loader/PSR0Autoloader.php';
+require_once $acamarPath . '/Acamar/Loader/PSR4Autoloader.php';
 
 // We need this autoloader because the application depends on it
-$autoloader = new PSR0Autoloader();
+$autoloader = new PSR4Autoloader();
 $autoloader->registerNamespaces([
-    'Acamar' => $acamarPath
+    'Acamar' => $acamarPath . '/Acamar'
 ]);
 
 $autoloader->register();

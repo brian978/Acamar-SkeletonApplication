@@ -16,7 +16,10 @@ return array(
         'routes.config.php',
     ],
     'modules' => [
-        'Application' => null
+        'Application' => [
+            'configs' => null,
+            'runSetup' => false,
+        ]
     ],
     'configCache' => [
         'enabled' => false,
