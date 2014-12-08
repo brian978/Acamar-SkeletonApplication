@@ -57,8 +57,7 @@ define('APPLICATION_ENV', $env === false ? Application::ENV_PRODUCTION : $env);
  * Loading the application
  * ----------------------------------------
  */
-$app = new Application(APPLICATION_ENV);
-$app->setAutoloader($autoloader);
+$app = new Application(APPLICATION_ENV, $autoloader);
 
 /**
  * ----------------------------------------
