@@ -21,7 +21,8 @@ class IndexController extends AbstractController
     public function indexAction()
     {
         return [
-            'someVar' => 'This is the index'
+            'someVar' => 'This is the index',
+            'ip' => $this->event->getRequest()->getIp()
         ];
     }
 }
