@@ -26,7 +26,7 @@ if (file_exists($loaderPath)) {
 // Getting the framework path
 $acamarPath = getenv('ACAMAR_PATH');
 if (!$acamarPath) {
-    $acamarPath = realpath('vendor/');
+    $acamarPath = realpath('vendor/brian978/acamar');
 }
 
 /**
