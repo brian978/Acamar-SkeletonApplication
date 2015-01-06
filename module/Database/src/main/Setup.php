@@ -45,13 +45,13 @@ class Setup
         // We will need this to create the schema (if it's not created already) before the dispatch
         $this->connectionRegistry = new ConnectionRegistry($application->getConfig()['db']);
 
-        // We set this here so we have access to it in the controller
+        // We set this so we have access to it in the controller
         $event->setParam(self::EVENT_PARAM_DB_CONN_REGISTRY, $this->connectionRegistry);
 
         // No need to check for the schema creation before we even reach the controller dispatch
         $eventManager->attach(MvcEvent::EVENT_DISPATCH, array($this, 'initializeSchema'), 200);
 
-        // This can be done here or in the controller (not decided if this is the right place yet)
+        // This can be done here or in the controller (not yet decided if this is the right place)
         BaseTable::setConnectionRegistry($this->connectionRegistry);
     }
 
@@ -62,5 +62,20 @@ class Setup
      */
     public function initializeSchema(MvcEvent $event)
     {
+        // Useless, I know
+        unset($event);
+
+        // Creates the databases if they don't exist
+        $pdo = $this->connectionRegistry->getConnection('main');
+        $sth = $pdo->prepare(file_get_contents('data/database/schema/bookstore.sql'));
+
+        // These checks will basically print out on the screen (for now)
+        if (!is_object($sth)) {
+            var_dump($pdo->errorInfo());
+        } else {
+            if (!$sth->execute()) {
+                var_dump($sth->errorInfo());
+            }
+        }
     }
 }
