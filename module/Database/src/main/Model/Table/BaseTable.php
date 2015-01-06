@@ -112,12 +112,20 @@ class BaseTable
      * Executes a query along with the binded parameters and returns the statement object
      *
      * @param QueryInterface $query
+     * @throws \RuntimeException
      * @return \PDOStatement
      */
     protected function executeSql(QueryInterface $query)
     {
         $sth = $this->getConnection()->prepare($query->__toString());
-        $sth->execute($query->getBindValues());
+
+        if (!$sth) {
+            throw new \RuntimeException($this->getConnection()->errorInfo()[2]);
+        }
+
+        if (!$sth->execute($query->getBindValues())) {
+            throw new \RuntimeException($sth->errorInfo());
+        }
 
         return $sth;
     }
@@ -125,11 +133,17 @@ class BaseTable
     /**
      * Returns a select object that results in the following statement: "SELECT * FROM `$tableName`"
      *
+     * @param bool $plain Set this to true when you need custom columns not "*"
      * @return \Aura\SqlQuery\Common\SelectInterface
      */
-    protected function getSelect()
+    protected function getSelect($plain = false)
     {
-        return $this->getQueryFactory()->newSelect()->from($this->tableName)->cols(['*']);
+        $select = $this->getQueryFactory()->newSelect();
+        if (false === $plain) {
+            $select->from($this->tableName)->cols(['*']);
+        }
+
+        return $select;
     }
 
     /**
