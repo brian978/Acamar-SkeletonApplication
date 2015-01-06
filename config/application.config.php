@@ -17,6 +17,13 @@ return array(
     ],
     // Modules that the application has
     'modules' => [
+        'Database' => [
+            'configs' => [
+                'database.config.php',
+                'database.local.php'
+            ],
+            'runSetup' => true
+        ],
         'Application' => [
             'configs' => null, // null: Use defaults; []: Don't load any configs, !empty([]): Load specified configs
             'runSetup' => false, // Run Setup class from module?
