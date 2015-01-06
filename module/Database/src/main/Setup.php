@@ -46,5 +46,18 @@ class Setup
 
         // We set this here so we have access to it in the controller
         $event->setParam(self::EVENT_PARAM_DB_CONN_REGISTRY, $this->connectionRegistry);
+
+        // No need to check for the schema creation before we even reach the controller dispatch
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH, array($this, 'initializeSchema'), 200);
+    }
+
+    /**
+     * The method will first check to see if the DB schema is initialized and initializes it if not
+     *
+     * @param MvcEvent $event
+     */
+    public function initializeSchema(MvcEvent $event)
+    {
+
     }
 }
