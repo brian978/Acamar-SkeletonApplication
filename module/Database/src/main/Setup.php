@@ -25,8 +25,6 @@ use Database\Model\Table\BaseTable;
  */
 class Setup
 {
-    const EVENT_PARAM_DB_CONN_REGISTRY = 'connectionRegistry';
-
     /**
      * @var ConnectionRegistry
      */
@@ -44,9 +42,6 @@ class Setup
 
         // We will need this to create the schema (if it's not created already) before the dispatch
         $this->connectionRegistry = new ConnectionRegistry($application->getConfig()['db']);
-
-        // We set this so we have access to it in the controller
-        $event->setParam(self::EVENT_PARAM_DB_CONN_REGISTRY, $this->connectionRegistry);
 
         // No need to check for the schema creation before we even reach the controller dispatch
         $eventManager->attach(MvcEvent::EVENT_DISPATCH, array($this, 'initializeSchema'), 200);
