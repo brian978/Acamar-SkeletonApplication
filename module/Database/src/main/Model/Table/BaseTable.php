@@ -30,7 +30,7 @@ class BaseTable
      */
     public static function setConnectionRegistry(ConnectionRegistry $connectionRegistry)
     {
-        static::$connectionRegistry = $connectionRegistry;
+        self::$connectionRegistry = $connectionRegistry;
     }
 
     /**
@@ -43,6 +43,6 @@ class BaseTable
      */
     protected  static function getConnectionRegistry()
     {
-        return static::$connectionRegistry;
+        return self::$connectionRegistry;
     }
 }
