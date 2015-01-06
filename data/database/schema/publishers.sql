@@ -3,5 +3,5 @@
 -- -------------------------------
 CREATE TABLE IF NOT EXISTS publishers (
   id INTEGER CONSTRAINT publishers_pKey PRIMARY KEY AUTOINCREMENT,
-  pName VARCHAR(255) NOT NULL
+  "name" VARCHAR(255) NOT NULL
 );
