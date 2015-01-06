@@ -31,7 +31,7 @@ class AuthorsTable extends BaseTable
             ->from('authors')
             ->cols(['*']);
 
-        $sth = static::getConnectionRegistry()->getConnection('main')->prepare($select->__toString());
+        $sth = static::getConnectionRegistry()->getConnection('default')->prepare($select->__toString());
         $sth->execute();
 
         return $sth->fetchAll(\PDO::FETCH_ASSOC);

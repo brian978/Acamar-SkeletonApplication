@@ -67,7 +67,7 @@ class Setup
 
         // Creates the databases if they don't exist
         $tables = ['authors', 'publishers', 'books'];
-        $pdo    = $this->connectionRegistry->getConnection('main');
+        $pdo    = $this->connectionRegistry->getConnection('default');
 
         foreach ($tables as $table) {
             $sth = $pdo->prepare(file_get_contents('data/database/schema/' . $table . '.sql'));

@@ -16,7 +16,7 @@ if (!file_exists($dbFile)) {
 // Now we can build the configuration
 return [
     'db' => [
-        'main' => [
+        'default' => [
             'dsn' => 'sqlite:' . $dbFile,
             'username' => '',
             'password' => '',
