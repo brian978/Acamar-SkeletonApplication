@@ -66,15 +66,21 @@ class Setup
         unset($event);
 
         // Creates the databases if they don't exist
-        $pdo = $this->connectionRegistry->getConnection('main');
-        $sth = $pdo->prepare(file_get_contents('data/database/schema/bookstore.sql'));
+        $tables = ['authors', 'publishers', 'books'];
+        $pdo    = $this->connectionRegistry->getConnection('main');
 
-        // These checks will basically print out on the screen (for now)
-        if (!is_object($sth)) {
-            var_dump($pdo->errorInfo());
-        } else {
-            if (!$sth->execute()) {
-                var_dump($sth->errorInfo());
+        foreach ($tables as $table) {
+            $sth = $pdo->prepare(file_get_contents('data/database/schema/' . $table . '.sql'));
+
+            // These checks will basically print out on the screen (for now)
+            if (!is_object($sth)) {
+                var_dump($pdo->errorInfo());
+                exit();
+            } else {
+                if (!$sth->execute()) {
+                    var_dump($sth->errorInfo());
+                    exit();
+                }
             }
         }
     }
