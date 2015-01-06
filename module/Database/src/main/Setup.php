@@ -11,6 +11,7 @@ namespace Database;
 
 use Acamar\Mvc\Event\MvcEvent;
 use Database\Connection\ConnectionRegistry;
+use Database\Model\Table\BaseTable;
 
 /**
  * Class Setup
@@ -49,6 +50,9 @@ class Setup
 
         // No need to check for the schema creation before we even reach the controller dispatch
         $eventManager->attach(MvcEvent::EVENT_DISPATCH, array($this, 'initializeSchema'), 200);
+
+        // This can be done here or in the controller (not decided if this is the right place yet)
+        BaseTable::setConnectionRegistry($this->connectionRegistry);
     }
 
     /**
