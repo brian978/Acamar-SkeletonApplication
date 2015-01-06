@@ -39,7 +39,8 @@ require_once $acamarPath . '/Acamar/Loader/PSR4Autoloader.php';
 // We need this autoloader because the application depends on it
 $autoloader = new PSR4Autoloader();
 $autoloader->registerNamespaces([
-    'Acamar' => $acamarPath . '/Acamar'
+    'Acamar' => $acamarPath . '/Acamar',
+    'Aura' => 'vendor/Aura'
 ]);
 
 $autoloader->register();
