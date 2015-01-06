@@ -62,6 +62,5 @@ class Setup
      */
     public function initializeSchema(MvcEvent $event)
     {
-
     }
 }
