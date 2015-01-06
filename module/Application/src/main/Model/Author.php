@@ -24,7 +24,12 @@ class Author
     /**
      * @var string
      */
-    protected $name = '';
+    protected $firstName = '';
+
+    /**
+     * @var string
+     */
+    protected $lastName = '';
 
     /**
      * @param int $id
@@ -47,13 +52,13 @@ class Author
     }
 
     /**
-     * @param string $name
+     * @param string $lastName
      *
      * @return Author
      */
-    public function setName($name)
+    public function setLastName($lastName)
     {
-        $this->name = $name;
+        $this->lastName = $lastName;
 
         return $this;
     }
@@ -61,8 +66,28 @@ class Author
     /**
      * @return string
      */
-    public function getName()
+    public function getLastName()
     {
-        return $this->name;
+        return $this->lastName;
+    }
+
+    /**
+     * @param string $firstName
+     *
+     * @return Author
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
     }
 }
