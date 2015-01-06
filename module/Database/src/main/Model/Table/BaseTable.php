@@ -133,14 +133,14 @@ class BaseTable
     /**
      * Returns a select object that results in the following statement: "SELECT * FROM `$tableName`"
      *
-     * @param bool $plain Set this to true when you need custom columns not "*"
+     * @param bool $skipCols Set this to true when you need custom columns instead of "*"
      * @return \Aura\SqlQuery\Common\SelectInterface
      */
-    protected function getSelect($plain = false)
+    protected function getSelect($skipCols = false)
     {
-        $select = $this->getQueryFactory()->newSelect();
-        if (false === $plain) {
-            $select->from($this->tableName)->cols(['*']);
+        $select = $this->getQueryFactory()->newSelect()->from($this->tableName);
+        if (false === $skipCols) {
+            $select->cols(['*']);
         }
 
         return $select;
