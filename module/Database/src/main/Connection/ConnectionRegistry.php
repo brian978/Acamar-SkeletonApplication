@@ -52,6 +52,22 @@ class ConnectionRegistry
     }
 
     /**
+     * Returns the SQL mode, from the config, that will be used by the \Aura\SqlQuery\QueryFactory class. If the SQL
+     * mode is not set for the connection is will return NULL
+     *
+     * @param string $name
+     * @return null|string
+     */
+    public function getConnectionSqlMode($name)
+    {
+        if (!isset($this->config[$name]['sql'])) {
+            return null;
+        }
+
+        return $this->config[$name]['sql'];
+    }
+
+    /**
      * Searches for the configuration for the connection and creates it. If the configuration is not found then it will
      * return NULL
      *
@@ -60,10 +76,10 @@ class ConnectionRegistry
      */
     protected function createConnection($name)
     {
-        if (!isset($this->config[$name])) {
+        if (!isset($this->config[$name]['pdo'])) {
             return null;
         }
 
-        return ConnectionFactory::factory($this->config[$name]);
+        return ConnectionFactory::factory($this->config[$name]['pdo']);
     }
 }

@@ -17,10 +17,13 @@ if (!file_exists($dbFile)) {
 return [
     'db' => [
         'default' => [
-            'dsn' => 'sqlite:' . $dbFile,
-            'username' => '',
-            'password' => '',
-            'options' => []
+            'sql' => 'sqlite', // This is used by \Aura\SqlQuery\QueryFactory class
+            'pdo' => [
+                'dsn' => 'sqlite:' . $dbFile,
+                'username' => '',
+                'password' => '',
+                'options' => []
+            ]
         ]
     ]
 ];
