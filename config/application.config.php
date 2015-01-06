@@ -32,6 +32,6 @@ return array(
     'configCache' => [
         'enabled' => false,
         'lifetime' => 30, // in seconds
-        'filePath' => 'cache/app.config.php'
+        'filePath' => 'data/cache/app.config.php'
     ]
 );
