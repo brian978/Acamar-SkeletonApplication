@@ -12,7 +12,7 @@ namespace Application\Model\Table;
 use Database\Model\Table\BaseTable;
 
 /**
- * Class Authors
+ * Class AuthorsTable
  *
  * @package Application\Model\Table
  */
