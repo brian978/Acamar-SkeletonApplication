@@ -16,5 +16,53 @@ namespace Application\Model;
  */
 class Author
 {
+    /**
+     * @var int
+     */
+    protected $id = 0;
 
+    /**
+     * @var string
+     */
+    protected $name = '';
+
+    /**
+     * @param int $id
+     *
+     * @return Author
+     */
+    public function setId($id)
+    {
+        $this->id = (int) $id;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return Author
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 }
