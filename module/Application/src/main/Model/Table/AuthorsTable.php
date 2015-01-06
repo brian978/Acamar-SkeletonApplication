@@ -33,8 +33,7 @@ class AuthorsTable extends BaseTable
     public function getAuthors()
     {
         $select = $this->getSelect();
-        $sth    = $this->executeSql($select);
 
-        return $sth->fetchAll(\PDO::FETCH_ASSOC);
+        return $this->executeSql($select)->fetchAll(\PDO::FETCH_ASSOC);
     }
 }
