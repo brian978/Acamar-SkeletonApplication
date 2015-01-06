@@ -16,12 +16,19 @@ use Acamar\Mvc\Controller\AbstractController;
  *
  * @package Application\Controller
  */
-class ProductsController extends AbstractController
+class AuthorsController extends AbstractController
 {
     public function indexAction()
     {
         return [
             'someVar' => 'This is the index action for the products controller'
+        ];
+    }
+
+    public function addAction()
+    {
+        return [
+            'someVar' => 'This is the add action for the products controller'
         ];
     }
 }

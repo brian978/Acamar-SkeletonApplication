@@ -10,6 +10,7 @@
 namespace Application\Controller;
 
 use Acamar\Mvc\Controller\AbstractController;
+use Application\Model\Table\AuthorsTable;
 
 /**
  * Class IndexController
@@ -20,9 +21,12 @@ class IndexController extends AbstractController
 {
     public function indexAction()
     {
+        $authors = new AuthorsTable();
+        $authorsList = $authors->getAuthors();
+
+
         return [
-            'someVar' => 'This is the index',
-            'ip' => $this->event->getRequest()->getIp()
+            'authors' => $authorsList,
         ];
     }
 }
