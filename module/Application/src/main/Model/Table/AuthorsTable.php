@@ -9,7 +9,6 @@
 
 namespace Application\Model\Table;
 
-use Aura\SqlQuery\QueryFactory;
 use Database\Model\Table\BaseTable;
 
 /**
@@ -20,19 +19,21 @@ use Database\Model\Table\BaseTable;
 class AuthorsTable extends BaseTable
 {
     /**
+     * The table name for the table that this object represents
+     *
+     * @var string
+     */
+    protected $tableName = 'authors';
+
+    /**
      * Returns all the authors from the database
      *
      * @return array
      */
     public function getAuthors()
     {
-        $queryFactory = new QueryFactory('sqlite');
-        $select       = $queryFactory->newSelect()
-            ->from('authors')
-            ->cols(['*']);
-
-        $sth = static::getConnectionRegistry()->getConnection('default')->prepare($select->__toString());
-        $sth->execute();
+        $select = $this->getSelect();
+        $sth    = $this->executeSql($select);
 
         return $sth->fetchAll(\PDO::FETCH_ASSOC);
     }
