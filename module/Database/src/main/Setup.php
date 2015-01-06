@@ -10,6 +10,7 @@
 namespace Database;
 
 use Acamar\Mvc\Event\MvcEvent;
+use Database\Connection\ConnectionRegistry;
 
 /**
  * Class Setup
@@ -23,6 +24,13 @@ use Acamar\Mvc\Event\MvcEvent;
  */
 class Setup
 {
+    const EVENT_PARAM_DB_CONN_REGISTRY = 'connectionRegistry';
+
+    /**
+     * @var ConnectionRegistry
+     */
+    private $connectionRegistry = null;
+
     /**
      * Runs the setup for this module
      *
@@ -30,6 +38,13 @@ class Setup
      */
     public function __construct(MvcEvent $event)
     {
+        $application  = $event->getTarget();
+        $eventManager = $application->getEventManager();
 
+        // We will need this to create the schema (if it's not created already) before the dispatch
+        $this->connectionRegistry = new ConnectionRegistry($application->getConfig()['db']);
+
+        // We set this here so we have access to it in the controller
+        $event->setParam(self::EVENT_PARAM_DB_CONN_REGISTRY, $this->connectionRegistry);
     }
 }
