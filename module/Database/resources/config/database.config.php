@@ -8,7 +8,7 @@
  */
 
 // Need to make sure the database file exists
-$dbFile = 'data/database/bookstore.sq3';
+$dbFile = 'data/database/bookstore.sqlite';
 if (!file_exists($dbFile)) {
     touch($dbFile);
 }
