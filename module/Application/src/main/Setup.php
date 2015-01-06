@@ -17,6 +17,8 @@ use Acamar\Mvc\Event\MvcEvent;
  * This object will be called on the MvcEvent::EVENT_BOOTSTRAP event
  * if the "runSetup" configuration key is set to "true"
  *
+ * Important: All the setup classes will run even if the stopPropagation() method is called on the event
+ *
  * @package Application
  */
 class Setup
@@ -30,4 +32,4 @@ class Setup
     {
 
     }
-} 
+}
