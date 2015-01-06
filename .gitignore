@@ -1,4 +1,4 @@
 .idea
-cache/*
-!cache/.gitkeep
+data/cache/*
+!data/cache/.gitkeep
 *.local.php
