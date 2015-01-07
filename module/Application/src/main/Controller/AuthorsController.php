@@ -27,4 +27,18 @@ class AuthorsController extends AbstractController
             'authors' => $table->getAuthors(),
         ];
     }
+
+    public function addAction()
+    {
+        $defaults = [
+            'firstName' => '',
+            'lastName' => '',
+        ];
+
+        $data = array_merge($defaults, $this->getRequest()->getPost());
+
+        return [
+            'post' => $data
+        ];
+    }
 }

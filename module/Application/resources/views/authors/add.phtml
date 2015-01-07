@@ -1,7 +1,18 @@
-<a href="<?= $this->url('mvc', array('controller' => 'index', 'action' => 'index')); ?>">Back to index</a>
-<br/>
-<br/>
-<a href="<?= $this->url('mvc', array('controller' => 'products', 'action' => 'add')); ?>">Add product</a>
-<br/>
-<br/>
-<?= $this->someVar ?>
+<form method="post">
+    <div>
+        <label>
+            First name:
+            <input type="text" name="firstName" value="<?= $this->post['firstName'] ?>">
+        </label>
+    </div>
+    <div>
+        <label>
+            Last name:
+            <input type="text" name="lastName" value="<?= $this->post['lastName'] ?>">
+        </label>
+    </div>
+    <br>
+    <div>
+        <button class="btn btn-primary">Submit</button>
+    </div>
+</form>
