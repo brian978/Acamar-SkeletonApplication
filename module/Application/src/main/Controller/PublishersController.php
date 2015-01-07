@@ -11,20 +11,21 @@ namespace Application\Controller;
 
 use Acamar\Mvc\Controller\AbstractController;
 use Application\Model\Table\AuthorsTable;
+use Application\Model\Table\PublishersTable;
 
 /**
- * Class ProductsController
+ * Class PublishersController
  *
  * @package Application\Controller
  */
-class AuthorsController extends AbstractController
+class PublishersController extends AbstractController
 {
     public function indexAction()
     {
-        $table = new AuthorsTable();
+        $table = new PublishersTable();
 
         return [
-            'authors' => $table->getAuthors(),
+            'publishers' => $table->getPublishers(),
         ];
     }
 }

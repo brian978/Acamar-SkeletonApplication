@@ -1,3 +1,10 @@
+<?php
+$booksUrl = $this->url('mvc', ['controller' => 'index', 'action' => 'index']);
+$authorsUrl = $this->url('mvc', ['controller' => 'authors', 'action' => 'index']);
+$publishersUrl = $this->url('mvc', ['controller' => 'publishers', 'action' => 'index']);
+?>
+
+
 <html>
     <head>
         <title>SlimMVC</title>
@@ -7,6 +14,14 @@
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <?= $this->content ?>
+        <div class="container">
+            <ul class="nav nav-tabs">
+                <li role="presentation"><a href="<?= $booksUrl ?>">Books</a></li>
+                <li role="presentation"><a href="<?= $authorsUrl ?>">Authors</a></li>
+                <li role="presentation"><a href="<?= $publishersUrl ?>">Publisher</a></li>
+            </ul>
+            <br>
+            <?= $this->content ?>
+        </div>
     </body>
 </html>

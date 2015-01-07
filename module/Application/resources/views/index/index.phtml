@@ -1,4 +1,27 @@
-<a href="<?= $this->url('mvc', array('controller' => 'authors', 'action' => 'add')); ?>">Add new author</a>
+<?php
+/** @var \Application\Model\Book $book */
+?>
 
-<?php var_dump($this->books); ?>
+<div>
+    <a href="<?= $this->url('mvc', array('controller' => 'index', 'action' => 'add')); ?>" class="btn btn-primary">
+        Add new book
+    </a>
+</div>
+<br>
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>ISBN</th>
+        <th>Publisher</th>
+        <th>Author</th>
+    </tr>
+    <?php foreach ($this->books as $book): ?>
+        <tr>
+            <td><?= $book->getTitle() ?></td>
+            <td><?= $book->getIsbn() ?></td>
+            <td><?= $book->getPublisher()->getName() ?></td>
+            <td><?= $book->getAuthor() ?></td>
+        </tr>
+    <?php endforeach ?>
+</table>
 

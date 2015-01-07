@@ -1,7 +1,23 @@
-<a href="<?= $this->url('mvc', array('controller' => 'index', 'action' => 'index')); ?>">Back to index</a>
-<br/>
-<br/>
-<a href="<?= $this->url('mvc', array('controller' => 'products', 'action' => 'add')); ?>">Add product</a>
-<br/>
-<br/>
-<?= $this->someVar ?>
+<?php
+/** @var \Application\Model\Author $author */
+?>
+
+<div>
+    <a href="<?= $this->url('mvc', array('controller' => 'authors', 'action' => 'add')); ?>" class="btn btn-primary">
+        Add new author
+    </a>
+</div>
+<br>
+<table class="table">
+    <tr>
+        <th>First name</th>
+        <th>Last name</th>
+    </tr>
+    <?php foreach ($this->authors as $author): ?>
+        <tr>
+            <td><?= $author->getFirstName() ?></td>
+            <td><?= $author->getLastName() ?></td>
+        </tr>
+    <?php endforeach ?>
+</table>
+

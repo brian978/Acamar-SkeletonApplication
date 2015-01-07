@@ -1,0 +1,21 @@
+<?php
+/** @var \Application\Model\Publisher $publisher */
+?>
+
+<div>
+    <a href="<?= $this->url('mvc', array('controller' => 'publishers', 'action' => 'add')); ?>" class="btn btn-primary">
+        Add new publisher
+    </a>
+</div>
+<br>
+<table class="table">
+    <tr>
+        <th>Name</th>
+    </tr>
+    <?php foreach ($this->publishers as $publisher): ?>
+        <tr>
+            <td><?= $publisher->getName() ?></td>
+        </tr>
+    <?php endforeach ?>
+</table>
+
