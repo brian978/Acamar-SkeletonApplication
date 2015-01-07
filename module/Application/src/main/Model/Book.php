@@ -116,7 +116,7 @@ class Book extends AbstractEntity
     }
 
     /**
-     * @return Book
+     * @return Publisher
      */
     public function getPublisher()
     {

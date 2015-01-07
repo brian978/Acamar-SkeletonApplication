@@ -9,7 +9,9 @@
 
 namespace Application\Model\Table;
 
+use Application\Model\Table\Maps\AuthorsMaps;
 use Database\Model\Table\BaseTable;
+use Database\Model\Table\Components\MappableTable;
 
 /**
  * Class AuthorsTable
@@ -18,6 +20,8 @@ use Database\Model\Table\BaseTable;
  */
 class AuthorsTable extends BaseTable
 {
+    use MappableTable;
+
     /**
      * The table name for the table that this object represents
      *
@@ -26,12 +30,25 @@ class AuthorsTable extends BaseTable
     protected $tableName = 'authors';
 
     /**
+     * Constructs the AuthorsTable object
+     *
+     */
+    public function __construct()
+    {
+        // Initializing the object mapper
+        // TODO: Find better way to do this
+        $this->getObjectMapper(new AuthorsMaps());
+    }
+
+    /**
      * Returns all the authors from the database
      *
      * @return array
      */
     public function getAuthors()
     {
-        return $this->executeSql($this->getSelect())->fetchAll(\PDO::FETCH_ASSOC);
+        $result = $this->executeSql($this->getSelect())->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $this->getObjectMapper()->populateCollection($result, AuthorsMaps::MAP_AUTHOR);
     }
 }

@@ -92,4 +92,14 @@ class Author extends AbstractEntity
     {
         return $this->firstName;
     }
+
+    /**
+     * Returns the full name of the Author using the following format: FirstName LastName
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
 }

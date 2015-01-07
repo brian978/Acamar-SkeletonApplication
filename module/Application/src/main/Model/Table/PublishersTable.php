@@ -9,7 +9,9 @@
 
 namespace Application\Model\Table;
 
+use Application\Model\Table\Maps\PublishersMaps;
 use Database\Model\Table\BaseTable;
+use Database\Model\Table\Components\MappableTable;
 
 /**
  * Class PublishersTable
@@ -18,6 +20,8 @@ use Database\Model\Table\BaseTable;
  */
 class PublishersTable extends BaseTable
 {
+    use MappableTable;
+
     /**
      * The table name for the table that this object represents
      *
@@ -26,12 +30,25 @@ class PublishersTable extends BaseTable
     protected $tableName = 'publishers';
 
     /**
-     * Returns all the authors from the database
+     * Constructs the PublishersTable object
+     *
+     */
+    public function __construct()
+    {
+        // Initializing the object mapper
+        // TODO: Find better way to do this
+        $this->getObjectMapper(new PublishersMaps());
+    }
+
+    /**
+     * Returns all the publishers from the database
      *
      * @return array
      */
     public function getPublishers()
     {
-        return $this->executeSql($this->getSelect())->fetchAll(\PDO::FETCH_ASSOC);
+        $result = $this->executeSql($this->getSelect())->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $this->getObjectMapper()->populateCollection($result, PublishersMaps::MAP_PUBLISHER);
     }
 }
