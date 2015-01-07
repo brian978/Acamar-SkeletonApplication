@@ -36,6 +36,7 @@ class BooksTable extends BaseTable
     public function __construct()
     {
         // Initializing the object mapper
+        // TODO: Find better way to do this
         $this->getObjectMapper(new BooksMaps());
     }
 

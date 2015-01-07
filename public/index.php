@@ -67,13 +67,3 @@ $app = new Application(APPLICATION_ENV, $autoloader);
  * ----------------------------------------
  */
 $app->run();
-
-// Just some benchmarks to keep an eye on
-echo "<br /><br />";
-echo "<h3>Benchmark</h3><hr>";
-echo "<br />";
-echo "<b>Memory peak usage:</b> " . (memory_get_peak_usage() / 1024 / 1024) . " MB <br /><br />";
-echo "<b>Memory usage:</b> " . (memory_get_usage() / 1024 / 1024) . " MB<br /><br />";
-echo "<b>Execution time:</b> " . (microtime(true) - $startTime) . " ms<br /><br />";
-echo "<b>Loaded files:</b> " . count(get_included_files()) . "<br /><br />";
-echo "<b>List of files:</b> <pre>" . var_export(get_included_files(), 1) . "</pre>";
