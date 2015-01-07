@@ -9,7 +9,9 @@
 
 namespace Application\Model\Table;
 
+use Application\Model\Table\Maps\BooksMaps;
 use Database\Model\Table\BaseTable;
+use Database\Model\Table\Components\MappableTable;
 
 /**
  * Class BooksTable
@@ -18,12 +20,24 @@ use Database\Model\Table\BaseTable;
  */
 class BooksTable extends BaseTable
 {
+    use MappableTable;
+
     /**
      * The table name for the table that this object represents
      *
      * @var string
      */
     protected $tableName = 'books';
+
+    /**
+     * Constructs the BooksTable object
+     *
+     */
+    public function __construct()
+    {
+        // Initializing the object mapper
+        $this->getObjectMapper(new BooksMaps());
+    }
 
     /**
      * Returns all the authors from the database
@@ -42,6 +56,8 @@ class BooksTable extends BaseTable
             ->join('LEFT', 'publishers', $this->tableName . '.publisherId = publishers.id')
             ->join('LEFT', 'authors', $this->tableName . '.authorId = authors.id');
 
-        return $this->executeSql($select)->fetchAll(\PDO::FETCH_ASSOC);
+        $result = $this->executeSql($select)->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $this->getObjectMapper()->populateCollection($result, BooksMaps::MAP_BOOK);
     }
 }

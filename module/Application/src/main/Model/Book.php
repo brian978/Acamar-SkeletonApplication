@@ -9,12 +9,14 @@
 
 namespace Application\Model;
 
+use Acamar\Model\Entity\AbstractEntity;
+
 /**
  * Class Book
  *
  * @package Application\Model
  */
-class Book
+class Book extends AbstractEntity
 {
     /**
      * @var int

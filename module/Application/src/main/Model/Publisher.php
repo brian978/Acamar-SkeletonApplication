@@ -9,12 +9,14 @@
 
 namespace Application\Model;
 
+use Acamar\Model\Entity\AbstractEntity;
+
 /**
  * Class Publisher
  *
  * @package Application\Model
  */
-class Publisher
+class Publisher extends AbstractEntity
 {
     /**
      * @var int
