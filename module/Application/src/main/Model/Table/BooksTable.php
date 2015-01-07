@@ -42,7 +42,6 @@ class BooksTable extends BaseTable
             ->join('LEFT', 'publishers', $this->tableName . '.publisherId = publishers.id')
             ->join('LEFT', 'authors', $this->tableName . '.authorId = authors.id');
 
-
         return $this->executeSql($select)->fetchAll(\PDO::FETCH_ASSOC);
     }
 }
