@@ -12,11 +12,16 @@
     <tr>
         <th>First name</th>
         <th>Last name</th>
+        <th>Options</th>
     </tr>
     <?php foreach ($this->authors as $author): ?>
         <tr>
             <td><?= $author->getFirstName() ?></td>
             <td><?= $author->getLastName() ?></td>
+            <td>
+                <span class="btn-xs btn-primary glyphicon glyphicon-pencil"></span>
+                <span class="btn-xs btn-primary glyphicon glyphicon-trash"></span>
+            </td>
         </tr>
     <?php endforeach ?>
 </table>
