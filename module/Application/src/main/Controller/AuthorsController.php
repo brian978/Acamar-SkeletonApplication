@@ -50,11 +50,11 @@ class AuthorsController extends AbstractController
         $data  = $table->getAuthorArray($id);
 
         if (empty($data)) {
-            $response = $this->getResponse()
+            $this->getResponse()
                 ->getHeaders()
                 ->set('Location', '/authors/index');
 
-            return $response;
+            return $this->getResponse();
         }
 
         // We save the object
@@ -70,18 +70,18 @@ class AuthorsController extends AbstractController
 
     public function deleteAction()
     {
-        $id    = (int) $this->getEvent()->getRoute()->getParam('id');
-        $table = new AuthorsTable();
-        $object  = $table->getAuthor($id);
+        $id     = (int) $this->getEvent()->getRoute()->getParam('id');
+        $table  = new AuthorsTable();
+        $object = $table->getAuthor($id);
 
         if (!empty($object)) {
             $table->deleteObject($object, AuthorsMaps::MAP_AUTHOR);
         }
 
-        $response = $this->getResponse()
+        $this->getResponse()
             ->getHeaders()
             ->set('Location', '/authors/index');
 
-        return $response;
+        return $this->getResponse();
     }
 }
