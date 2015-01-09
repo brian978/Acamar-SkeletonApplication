@@ -11,6 +11,7 @@ namespace Application\Model\Table;
 
 use Application\Model\Book;
 use Application\Model\Table\Maps\BooksMaps;
+use Aura\SqlQuery\Common\InsertInterface;
 use Database\Model\Table\Components\MappableTable;
 use Database\Model\Table\MappableBaseTable;
 
@@ -75,7 +76,7 @@ class BooksTable extends MappableBaseTable
             ->join('LEFT', 'publishers', $this->tableName . '.publisherId = publishers.id')
             ->join('LEFT', 'authors', $this->tableName . '.authorId = authors.id');
 
-        $select->where('id = :id');
+        $select->where($this->tableName . '.id = :id');
         $select->bindValue('id', $id);
 
         $result = $this->executeSql($select)->fetch();

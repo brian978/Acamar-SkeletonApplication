@@ -42,6 +42,12 @@ class PublishersController extends AbstractController
             $data  = array_merge($data, $this->getRequest()->getPost());
             $table = new PublishersTable();
             $table->saveArray($data, PublishersMaps::MAP_PUBLISHER);
+
+            $this->getResponse()
+                ->getHeaders()
+                ->set('Location', '/authors/index');
+
+            return 0;
         }
 
         return [

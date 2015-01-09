@@ -17,14 +17,19 @@
         <th>Options</th>
     </tr>
     <?php foreach ($this->books as $book): ?>
+        <?php
+        $editUrl = $this->url('mvc', ['action' => 'edit', 'id' => $book->getId()], true);
+        $deleteUrl = $this->url('mvc', ['action' => 'delete', 'id' => $book->getId()], true);
+
+        ?>
         <tr>
             <td><?= $book->getTitle() ?></td>
             <td><?= $book->getIsbn() ?></td>
             <td><?= $book->getPublisher()->getName() ?></td>
             <td><?= $book->getAuthor() ?></td>
             <td>
-                <span class="btn-xs btn-primary glyphicon glyphicon-pencil"></span>
-                <span class="btn-xs btn-primary glyphicon glyphicon-trash"></span>
+                <a href="<?= $editUrl ?>"><span class="btn-xs btn-primary glyphicon glyphicon-pencil"></span></a>
+                <a href="<?= $deleteUrl ?>"><span class="btn-xs btn-primary glyphicon glyphicon-trash"></span></a>
             </td>
         </tr>
     <?php endforeach ?>

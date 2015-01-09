@@ -43,6 +43,12 @@ class AuthorsController extends AbstractController
             $data  = array_merge($data, $this->getRequest()->getPost());
             $table = new AuthorsTable();
             $table->saveArray($data, AuthorsMaps::MAP_AUTHOR);
+
+            $this->getResponse()
+                ->getHeaders()
+                ->set('Location', '/authors/index');
+
+            return 0;
         }
 
         return [

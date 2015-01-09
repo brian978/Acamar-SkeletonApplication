@@ -20,7 +20,11 @@
             Publisher:
             <select name="publisherId">
                 <?php foreach ($this->publishers as $publisher): ?>
-                    <option value="<?= $publisher->getId() ?>"><?= $publisher->getName() ?></option>
+                    <?php if ($this->post['publisherId'] === $publisher->getId()): ?>
+                        <option value="<?= $publisher->getId() ?>" selected><?= $publisher->getName() ?></option>
+                    <?php else: ?>
+                        <option value="<?= $publisher->getId() ?>"><?= $publisher->getName() ?></option>
+                    <?php endif ?>
                 <?php endforeach ?>
             </select>
         </label>
@@ -30,7 +34,11 @@
             Author:
             <select name="authorId">
                 <?php foreach ($this->authors as $author): ?>
-                    <option value="<?= $author->getId() ?>"><?= $author ?></option>
+                    <?php if ($this->post['authorId'] === $author->getId()): ?>
+                        <option value="<?= $author->getId() ?>" selected><?= $author ?></option>
+                    <?php else: ?>
+                        <option value="<?= $author->getId() ?>"><?= $author ?></option>
+                    <?php endif ?>
                 <?php endforeach ?>
             </select>
         </label>

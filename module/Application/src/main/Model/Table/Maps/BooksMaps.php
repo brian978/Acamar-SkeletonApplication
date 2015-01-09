@@ -19,7 +19,8 @@ use Acamar\Model\Mapper\MapCollection;
  */
 class BooksMaps extends MapCollection
 {
-    const MAP_BOOK = 'book';
+    const MAP_BOOK         = 'book';
+    const MAP_BOOK_DB_SAVE = 'bookDbSave';
 
     /**
      * An array representing the data in the collection
@@ -44,6 +45,23 @@ class BooksMaps extends MapCollection
                 ]
             ]
         ],
+        self::MAP_BOOK_DB_SAVE => [
+            'entity' => '\Application\Model\Book',
+            'identField' => 'id',
+            'specs' => [
+                'id' => 'id',
+                'title' => 'title',
+                'isbn' => 'isbn',
+                'publisherId' => [
+                    'toProperty' => 'publisher',
+                    'map' => 'saveJoinedPublisher'
+                ],
+                'authorId' => [
+                    'toProperty' => 'author',
+                    'map' => 'saveJoinedAuthor'
+                ]
+            ]
+        ],
         'joinedPublisher' => [
             'entity' => '\Application\Model\Publisher',
             'identField' => 'publisherId',
@@ -59,6 +77,20 @@ class BooksMaps extends MapCollection
                 'authorId' => 'id',
                 'authorFirstName' => 'firstName',
                 'authorLastName' => 'lastName',
+            ]
+        ],
+        'saveJoinedPublisher' => [
+            'entity' => '\Application\Model\Publisher',
+            'identField' => 'publisherId',
+            'specs' => [
+                'publisherId' => 'id',
+            ]
+        ],
+        'saveJoinedAuthor' => [
+            'entity' => '\Application\Model\Author',
+            'identField' => 'authorId',
+            'specs' => [
+                'authorId' => 'id',
             ]
         ]
     ];
