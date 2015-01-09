@@ -9,6 +9,7 @@
 
 namespace Application\Model\Table;
 
+use Application\Model\Author;
 use Application\Model\Table\Maps\AuthorsMaps;
 use Database\Model\Table\Components\MappableTable;
 use Database\Model\Table\MappableBaseTable;
@@ -50,7 +51,7 @@ class AuthorsTable extends MappableBaseTable
      * Returns an object identifying the requested author
      *
      * @param int $id
-     * @return \Application\Model\Author|array
+     * @return \Application\Model\Author
      */
     public function getAuthor($id)
     {
@@ -60,7 +61,7 @@ class AuthorsTable extends MappableBaseTable
 
         $result = $this->executeSql($select)->fetch();
         if (!$result) {
-            return [];
+            return new Author();
         }
 
         return $this->getObjectMapper()->populate($result, AuthorsMaps::MAP_AUTHOR);
@@ -71,12 +72,12 @@ class AuthorsTable extends MappableBaseTable
      * Theoretically we don't need this but it looks nicer in the controller
      *
      * @param int $id
-     * @return \Application\Model\Author|array
+     * @return array
      */
     public function getAuthorArray($id)
     {
         $item = $this->getAuthor($id);
-        if (!empty($item)) {
+        if ($item->getId() !== 0) {
             return $this->getObjectMapper()->extract($item, AuthorsMaps::MAP_AUTHOR);
         }
 

@@ -14,11 +14,16 @@
         <th>Options</th>
     </tr>
     <?php foreach ($this->publishers as $publisher): ?>
+        <?php
+        $editUrl = $this->url('mvc', ['action' => 'edit', 'id' => $publisher->getId()], true);
+        $deleteUrl = $this->url('mvc', ['action' => 'delete', 'id' => $publisher->getId()], true);
+
+        ?>
         <tr>
             <td><?= $publisher->getName() ?></td>
             <td>
-                <span class="btn-xs btn-primary glyphicon glyphicon-pencil"></span>
-                <span class="btn-xs btn-primary glyphicon glyphicon-trash"></span>
+                <a href="<?= $editUrl ?>"><span class="btn-xs btn-primary glyphicon glyphicon-pencil"></span></a>
+                <a href="<?= $deleteUrl ?>"><span class="btn-xs btn-primary glyphicon glyphicon-trash"></span></a>
             </td>
         </tr>
     <?php endforeach ?>

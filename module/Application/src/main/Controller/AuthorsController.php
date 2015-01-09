@@ -38,6 +38,13 @@ class AuthorsController extends AbstractController
 
         $data = array_merge($defaults, $this->getRequest()->getPost());
 
+        // We save the object
+        if ($this->getRequest()->isPost()) {
+            $data  = array_merge($data, $this->getRequest()->getPost());
+            $table = new AuthorsTable();
+            $table->saveArray($data, AuthorsMaps::MAP_AUTHOR);
+        }
+
         return [
             'post' => $data
         ];
@@ -74,7 +81,7 @@ class AuthorsController extends AbstractController
         $table  = new AuthorsTable();
         $object = $table->getAuthor($id);
 
-        if (!empty($object)) {
+        if ($object->getId() !== 0) {
             $table->deleteObject($object, AuthorsMaps::MAP_AUTHOR);
         }
 
