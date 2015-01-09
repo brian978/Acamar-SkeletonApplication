@@ -54,7 +54,7 @@ class AuthorsController extends AbstractController
                 ->getHeaders()
                 ->set('Location', '/authors/index');
 
-            return $this->getResponse();
+            return 0;
         }
 
         // We save the object
@@ -82,6 +82,6 @@ class AuthorsController extends AbstractController
             ->getHeaders()
             ->set('Location', '/authors/index');
 
-        return $this->getResponse();
+        return 0;
     }
 }
