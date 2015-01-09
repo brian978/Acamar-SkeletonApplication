@@ -47,8 +47,44 @@ class AuthorsTable extends BaseTable
      */
     public function getAuthors()
     {
-        $result = $this->executeSql($this->getSelect())->fetchAll(\PDO::FETCH_ASSOC);
+        $result = $this->executeSql($this->getSelect())->fetchAll();
 
         return $this->getObjectMapper()->populateCollection($result, AuthorsMaps::MAP_AUTHOR);
+    }
+
+    /**
+     * Returns an object identifying the requested author
+     *
+     * @param int $id
+     * @return \Application\Model\Author|array
+     */
+    public function getAuthor($id)
+    {
+        $select = $this->getSelect();
+        $select->where('id = :id');
+        $select->bindValue('id', $id);
+
+        $result = $this->executeSql($select)->fetch();
+        if (!$result) {
+            return [];
+        }
+
+        return $this->getObjectMapper()->populate($result, AuthorsMaps::MAP_AUTHOR);
+    }
+
+    /**
+     * Returns an object identifying the requested author but in array format
+     *
+     * @param int $id
+     * @return \Application\Model\Author|array
+     */
+    public function getAuthorArray($id)
+    {
+        $item = $this->getAuthor($id);
+        if(!empty($item)) {
+            return $this->getObjectMapper()->extract($item, AuthorsMaps::MAP_AUTHOR);
+        }
+
+        return $item;
     }
 }

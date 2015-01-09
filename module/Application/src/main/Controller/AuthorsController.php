@@ -41,4 +41,31 @@ class AuthorsController extends AbstractController
             'post' => $data
         ];
     }
+
+    public function editAction()
+    {
+        $id    = (int) $this->getEvent()->getRoute()->getParam('id');
+        $post  = $this->getRequest()->getPost();
+        $table = new AuthorsTable();
+        $data  = $table->getAuthorArray($id);
+
+        if(empty($data)) {
+            $response = $this->getResponse()
+                ->getHeaders()
+                ->set('Location', '/authors/index');
+
+            return $response;
+        }
+
+        // We save the object
+        if($this->getRequest()->isPost()) {
+            $data = $post;
+
+            $table->save($post);
+        }
+
+        return [
+            'post' => $data
+        ];
+    }
 }
