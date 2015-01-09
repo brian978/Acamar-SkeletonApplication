@@ -68,6 +68,7 @@ class AuthorsTable extends MappableBaseTable
 
     /**
      * Returns an object identifying the requested author but in array format
+     * Theoretically we don't need this but it looks nicer in the controller
      *
      * @param int $id
      * @return \Application\Model\Author|array
