@@ -1,5 +1,6 @@
 <?php
 /** @var \Application\Model\Author $author */
+
 ?>
 
 <div>
@@ -15,12 +16,17 @@
         <th>Options</th>
     </tr>
     <?php foreach ($this->authors as $author): ?>
+        <?php
+        $editUrl = $this->url('mvc', ['action' => 'edit', 'id' => $author->getId()], true);
+        $deleteUrl = $this->url('mvc', ['action' => 'delete', 'id' => $author->getId()], true);
+
+        ?>
         <tr>
             <td><?= $author->getFirstName() ?></td>
             <td><?= $author->getLastName() ?></td>
             <td>
-                <span class="btn-xs btn-primary glyphicon glyphicon-pencil"></span>
-                <span class="btn-xs btn-primary glyphicon glyphicon-trash"></span>
+                <a href="<?= $editUrl ?>"><span class="btn-xs btn-primary glyphicon glyphicon-pencil"></span></a>
+                <a href="<?= $deleteUrl ?>"><span class="btn-xs btn-primary glyphicon glyphicon-trash"></span></a>
             </td>
         </tr>
     <?php endforeach ?>
