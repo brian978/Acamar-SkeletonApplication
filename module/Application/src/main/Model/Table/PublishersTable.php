@@ -10,7 +10,6 @@
 namespace Application\Model\Table;
 
 use Application\Model\Table\Maps\PublishersMaps;
-use Database\Model\Table\BaseTable;
 use Database\Model\Table\Components\MappableTable;
 
 /**
@@ -18,10 +17,8 @@ use Database\Model\Table\Components\MappableTable;
  *
  * @package Application\Model\Table
  */
-class PublishersTable extends BaseTable
+class PublishersTable extends MappableBaseTable
 {
-    use MappableTable;
-
     /**
      * The table name for the table that this object represents
      *
@@ -30,15 +27,11 @@ class PublishersTable extends BaseTable
     protected $tableName = 'publishers';
 
     /**
-     * Constructs the PublishersTable object
+     * The property must contain the class name that will be used to determine the mappings for the objects
      *
+     * @var string
      */
-    public function __construct()
-    {
-        // Initializing the object mapper
-        // TODO: Find better way to do this
-        $this->getObjectMapper(new PublishersMaps());
-    }
+    protected $tableMapsClass = 'Application\Model\Table\Maps\PublishersMaps';
 
     /**
      * Returns all the publishers from the database
@@ -47,7 +40,7 @@ class PublishersTable extends BaseTable
      */
     public function getPublishers()
     {
-        $result = $this->executeSql($this->getSelect())->fetchAll(\PDO::FETCH_ASSOC);
+        $result = $this->executeSql($this->getSelect())->fetchAll();
 
         return $this->getObjectMapper()->populateCollection($result, PublishersMaps::MAP_PUBLISHER);
     }

@@ -11,6 +11,7 @@ namespace Application\Controller;
 
 use Acamar\Mvc\Controller\AbstractController;
 use Application\Model\Table\AuthorsTable;
+use Application\Model\Table\Maps\AuthorsMaps;
 
 /**
  * Class ProductsController
@@ -45,11 +46,10 @@ class AuthorsController extends AbstractController
     public function editAction()
     {
         $id    = (int) $this->getEvent()->getRoute()->getParam('id');
-        $post  = $this->getRequest()->getPost();
         $table = new AuthorsTable();
         $data  = $table->getAuthorArray($id);
 
-        if(empty($data)) {
+        if (empty($data)) {
             $response = $this->getResponse()
                 ->getHeaders()
                 ->set('Location', '/authors/index');
@@ -58,10 +58,9 @@ class AuthorsController extends AbstractController
         }
 
         // We save the object
-        if($this->getRequest()->isPost()) {
-            $data = $post;
-
-            $table->save($post);
+        if ($this->getRequest()->isPost()) {
+            $data = array_merge($data, $this->getRequest()->getPost());
+            $table->saveArray($data, AuthorsMaps::MAP_AUTHOR);
         }
 
         return [

@@ -10,7 +10,6 @@
 namespace Application\Model\Table;
 
 use Application\Model\Table\Maps\AuthorsMaps;
-use Database\Model\Table\BaseTable;
 use Database\Model\Table\Components\MappableTable;
 
 /**
@@ -18,10 +17,8 @@ use Database\Model\Table\Components\MappableTable;
  *
  * @package Application\Model\Table
  */
-class AuthorsTable extends BaseTable
+class AuthorsTable extends MappableBaseTable
 {
-    use MappableTable;
-
     /**
      * The table name for the table that this object represents
      *
@@ -30,15 +27,11 @@ class AuthorsTable extends BaseTable
     protected $tableName = 'authors';
 
     /**
-     * Constructs the AuthorsTable object
+     * The property must contain the class name that will be used to determine the mappings for the objects
      *
+     * @var string
      */
-    public function __construct()
-    {
-        // Initializing the object mapper
-        // TODO: Find better way to do this
-        $this->getObjectMapper(new AuthorsMaps());
-    }
+    protected $tableMapsClass = 'Application\Model\Table\Maps\AuthorsMaps';
 
     /**
      * Returns all the authors from the database
@@ -81,7 +74,7 @@ class AuthorsTable extends BaseTable
     public function getAuthorArray($id)
     {
         $item = $this->getAuthor($id);
-        if(!empty($item)) {
+        if (!empty($item)) {
             return $this->getObjectMapper()->extract($item, AuthorsMaps::MAP_AUTHOR);
         }
 
