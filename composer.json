@@ -1,5 +1,5 @@
 {
     "require": {
-        "brian978/acamar": "dev-master"
+        "brian978/acamar": "1.*"
     }
 }
