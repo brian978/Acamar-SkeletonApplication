@@ -123,6 +123,8 @@ class BaseTable
             throw new \RuntimeException($this->getConnection()->errorInfo()[2]);
         }
 
+        $sth->setFetchMode(\PDO::FETCH_ASSOC);
+
         if (!$sth->execute($query->getBindValues())) {
             throw new \RuntimeException($sth->errorInfo());
         }
