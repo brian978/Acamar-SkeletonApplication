@@ -14,11 +14,11 @@ use Aura\SqlQuery\QueryInterface;
 use Database\Connection\ConnectionRegistry;
 
 /**
- * Class BaseTable
+ * Abstract class BaseTable
  *
  * @package Database\Model\Table
  */
-class BaseTable
+abstract class BaseTable
 {
     /**
      * A connection registry for the database connections
@@ -130,6 +130,32 @@ class BaseTable
         }
 
         return $sth;
+    }
+
+    /**
+     * The method will insert a new entry or update an existing one, depending on the contents of the $data parameter
+     *
+     * @param array $data
+     * @param string $primaryKey The name of the primary key column
+     * @return \Aura\SqlQuery\Common\InsertInterface|\Aura\SqlQuery\Common\UpdateInterface
+     */
+    public function save(array $data, $primaryKey)
+    {
+        if (!isset($data[$primaryKey]) || empty($data[$primaryKey])) {
+            $query = $this->getInsert();
+        } else {
+            $query = $this->getUpdate();
+            $query->where("$primaryKey = :$primaryKey");
+        }
+
+        $query->cols(array_keys($data));
+        $query->bindValues($data);
+
+        // Executing
+        $this->executeSql($query);
+
+        // The SQL is returned instead of other information to provide greater flexibility
+        return $query;
     }
 
     /**
