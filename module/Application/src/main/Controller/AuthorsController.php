@@ -67,4 +67,21 @@ class AuthorsController extends AbstractController
             'post' => $data
         ];
     }
+
+    public function deleteAction()
+    {
+        $id    = (int) $this->getEvent()->getRoute()->getParam('id');
+        $table = new AuthorsTable();
+        $object  = $table->getAuthor($id);
+
+        if (!empty($object)) {
+            $table->deleteObject($object, AuthorsMaps::MAP_AUTHOR);
+        }
+
+        $response = $this->getResponse()
+            ->getHeaders()
+            ->set('Location', '/authors/index');
+
+        return $response;
+    }
 }
