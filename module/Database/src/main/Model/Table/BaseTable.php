@@ -159,6 +159,31 @@ abstract class BaseTable
     }
 
     /**
+     * The method will delete an entry from the database using the information from the $data parameter
+     *
+     * @param array $data
+     * @param string $primaryKey The name of the primary key column
+     * @return \Aura\SqlQuery\Common\DeleteInterface
+     * @throws \InvalidArgumentException
+     */
+    public function delete(array $data, $primaryKey)
+    {
+        if (!isset($data[$primaryKey]) || empty($data[$primaryKey])) {
+            throw new \InvalidArgumentException("Primary key data not found");
+        }
+
+        $query = $this->getDelete();
+        $query->where("$primaryKey = :$primaryKey");
+        $query->bindValue($primaryKey, $data[$primaryKey]);
+
+        // Executing
+        $this->executeSql($query);
+
+        // The SQL is returned instead of other information to provide greater flexibility
+        return $query;
+    }
+
+    /**
      * Returns a select object that results in the following statement: "SELECT * FROM `$tableName`"
      *
      * @param bool $skipCols Set this to true when you need custom columns instead of "*"

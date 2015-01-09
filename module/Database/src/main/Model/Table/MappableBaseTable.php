@@ -63,7 +63,7 @@ abstract class MappableBaseTable extends BaseTable
     }
 
     /**
-     * Saves an object with a given map and updates the primary key
+     * Saves an object using the given map and updates the primary key
      *
      * @param EntityInterface $object
      * @param $map
@@ -90,7 +90,7 @@ abstract class MappableBaseTable extends BaseTable
     }
 
     /**
-     * Saves an array with a given map and updates the primary key
+     * Saves an array using the given map and updates the primary key
      *
      * @param array $data
      * @param $map
@@ -113,5 +113,47 @@ abstract class MappableBaseTable extends BaseTable
             $id                = $this->getConnection()->lastInsertId($this->tableName . '.' . $primaryKey);
             $data[$primaryKey] = $id;
         }
+    }
+
+    /**
+     * Deletes an object using the given map
+     *
+     * @param EntityInterface $object
+     * @param $map
+     * @return void
+     * @throws \RuntimeException
+     */
+    public function deleteObject(EntityInterface $object, $map)
+    {
+        $primaryKey = $this->getTableMaps()->getIdentField($map);
+        if (empty($primaryKey)) {
+            throw new \RuntimeException(
+                "Check the 'identField' for the $map map and make sure it contains the primary key"
+            );
+        }
+
+        $objectMapper = $this->getObjectMapper();
+
+        $this->delete($objectMapper->extract($object, $map), $primaryKey);
+    }
+
+    /**
+     * Deletes an object using the given map
+     *
+     * @param array $data
+     * @param $map
+     * @return void
+     * @throws \RuntimeException
+     */
+    public function deleteArray(array $data, $map)
+    {
+        $primaryKey = $this->getTableMaps()->getIdentField($map);
+        if (empty($primaryKey)) {
+            throw new \RuntimeException(
+                "Check the 'identField' for the $map map and make sure it contains the primary key"
+            );
+        }
+
+        $this->delete($data, $primaryKey);
     }
 }
