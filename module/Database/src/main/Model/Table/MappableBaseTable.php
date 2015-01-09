@@ -7,11 +7,10 @@
  * @license https://github.com/brian978/Acamar-SkeletonApplication/blob/master/LICENSE New BSD License
  */
 
-namespace Application\Model\Table;
+namespace Database\Model\Table;
 
 use Acamar\Model\Entity\EntityInterface;
 use Aura\SqlQuery\Common\InsertInterface;
-use Database\Model\Table\BaseTable;
 use Database\Model\Table\Components\MappableTable;
 
 /**

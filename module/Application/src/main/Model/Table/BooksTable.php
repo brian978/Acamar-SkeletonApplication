@@ -11,6 +11,7 @@ namespace Application\Model\Table;
 
 use Application\Model\Table\Maps\BooksMaps;
 use Database\Model\Table\Components\MappableTable;
+use Database\Model\Table\MappableBaseTable;
 
 /**
  * Class BooksTable
