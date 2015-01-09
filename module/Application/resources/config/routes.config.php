@@ -31,7 +31,7 @@ return array(
             )
         ),
         'mvc' => array(
-            'pattern' => '/:controller(/:action)',
+            'pattern' => '/:controller(/:action(/:id))',
             'defaults' => array(
                 'module' => 'Application'
             )
