@@ -45,7 +45,7 @@ class PublishersController extends AbstractController
 
             $this->getResponse()
                 ->getHeaders()
-                ->set('Location', '/authors/index');
+                ->set('Location', '/publishers/index');
 
             return 0;
         }
