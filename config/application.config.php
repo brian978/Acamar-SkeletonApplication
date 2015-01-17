@@ -7,7 +7,7 @@
  * @license https://github.com/brian978/Acamar-SkeletonApplication/blob/master/LICENSE New BSD License
  */
 
-return array(
+return [
     'independentModules' => false,
     'modulesPath' => 'module/',
     // Default configurations for the modules (can be overwritten by module specific setup)
@@ -34,4 +34,4 @@ return array(
         'lifetime' => 30, // in seconds
         'filePath' => 'data/cache/app.config.php'
     ]
-);
+];

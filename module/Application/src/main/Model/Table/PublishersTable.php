@@ -11,7 +11,6 @@ namespace Application\Model\Table;
 
 use Application\Model\Publisher;
 use Application\Model\Table\Maps\PublishersMaps;
-use Database\Model\Table\Components\MappableTable;
 use Database\Model\Table\MappableBaseTable;
 
 /**

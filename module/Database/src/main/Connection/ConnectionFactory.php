@@ -25,7 +25,7 @@ class ConnectionFactory
     public static function factory(array $config)
     {
         $class = new \ReflectionClass('PDO');
-        $pdo   = $class->newInstanceArgs($config);
+        $pdo = $class->newInstanceArgs($config);
 
         return $pdo;
     }

@@ -11,8 +11,6 @@ namespace Application\Model\Table;
 
 use Application\Model\Book;
 use Application\Model\Table\Maps\BooksMaps;
-use Aura\SqlQuery\Common\InsertInterface;
-use Database\Model\Table\Components\MappableTable;
 use Database\Model\Table\MappableBaseTable;
 
 /**

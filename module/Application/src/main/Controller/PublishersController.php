@@ -39,7 +39,7 @@ class PublishersController extends AbstractController
 
         // We save the object
         if ($this->getRequest()->isPost()) {
-            $data  = array_merge($data, $this->getRequest()->getPost());
+            $data = array_merge($data, $this->getRequest()->getPost());
             $table = new PublishersTable();
             $table->saveArray($data, PublishersMaps::MAP_PUBLISHER);
 
@@ -57,9 +57,9 @@ class PublishersController extends AbstractController
 
     public function editAction()
     {
-        $id    = (int) $this->getEvent()->getRoute()->getParam('id');
+        $id = (int) $this->getEvent()->getRoute()->getParam('id');
         $table = new PublishersTable();
-        $data  = $table->getPublisherArray($id);
+        $data = $table->getPublisherArray($id);
 
         if (empty($data)) {
             $this->getResponse()
@@ -82,8 +82,8 @@ class PublishersController extends AbstractController
 
     public function deleteAction()
     {
-        $id     = (int) $this->getEvent()->getRoute()->getParam('id');
-        $table  = new PublishersTable();
+        $id = (int) $this->getEvent()->getRoute()->getParam('id');
+        $table = new PublishersTable();
         $object = $table->getPublisher($id);
 
         if ($object->getId() !== 0) {

@@ -19,7 +19,7 @@ use Acamar\Model\Mapper\MapCollection;
  */
 class BooksMaps extends MapCollection
 {
-    const MAP_BOOK         = 'book';
+    const MAP_BOOK = 'book';
     const MAP_BOOK_DB_SAVE = 'bookDbSave';
 
     /**

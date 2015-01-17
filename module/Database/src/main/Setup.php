@@ -37,14 +37,14 @@ class Setup
      */
     public function __construct(MvcEvent $event)
     {
-        $application  = $event->getTarget();
+        $application = $event->getTarget();
         $eventManager = $application->getEventManager();
 
         // We will need this to create the schema (if it's not created already) before the dispatch
         $this->connectionRegistry = new ConnectionRegistry($application->getConfig()['db']);
 
         // No need to check for the schema creation before we even reach the controller dispatch
-        $eventManager->attach(MvcEvent::EVENT_DISPATCH, array($this, 'initializeSchema'), 200);
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH, [$this, 'initializeSchema'], 200);
 
         // This can be done here or in the controller (not yet decided if this is the right place)
         BaseTable::setConnectionRegistry($this->connectionRegistry);
@@ -62,7 +62,7 @@ class Setup
 
         // Creates the databases if they don't exist
         $tables = ['authors', 'publishers', 'books'];
-        $pdo    = $this->connectionRegistry->getConnection('default');
+        $pdo = $this->connectionRegistry->getConnection('default');
 
         foreach ($tables as $table) {
             $sth = $pdo->prepare(file_get_contents('data/database/schema/' . $table . '.sql'));

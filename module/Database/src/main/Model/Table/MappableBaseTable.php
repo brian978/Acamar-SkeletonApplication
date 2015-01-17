@@ -80,7 +80,7 @@ abstract class MappableBaseTable extends BaseTable
         }
 
         $objectMapper = $this->getObjectMapper();
-        $query        = $this->save($objectMapper->extract($object, $map), $primaryKey);
+        $query = $this->save($objectMapper->extract($object, $map), $primaryKey);
 
         // We need to update the primary key of the object if this is an insert
         if ($query instanceof InsertInterface) {
@@ -110,7 +110,7 @@ abstract class MappableBaseTable extends BaseTable
 
         // We need to update the primary key of the object if this is an insert
         if ($query instanceof InsertInterface) {
-            $id                = $this->getConnection()->lastInsertId($this->tableName . '.' . $primaryKey);
+            $id = $this->getConnection()->lastInsertId($this->tableName . '.' . $primaryKey);
             $data[$primaryKey] = $id;
         }
     }

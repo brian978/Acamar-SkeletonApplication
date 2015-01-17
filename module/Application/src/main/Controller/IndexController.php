@@ -42,7 +42,7 @@ class IndexController extends AbstractController
 
         // We save the object
         if ($this->getRequest()->isPost()) {
-            $data  = array_merge($data, $this->getRequest()->getPost());
+            $data = array_merge($data, $this->getRequest()->getPost());
             $table = new BooksTable();
             $table->saveArray($data, BooksMaps::MAP_BOOK);
 
@@ -54,7 +54,7 @@ class IndexController extends AbstractController
         }
 
         $publishers = (new PublishersTable())->getPublishers();
-        $authors    = (new AuthorsTable())->getAuthors();
+        $authors = (new AuthorsTable())->getAuthors();
 
         return [
             'post' => $data,
@@ -65,9 +65,9 @@ class IndexController extends AbstractController
 
     public function editAction()
     {
-        $id    = (int) $this->getEvent()->getRoute()->getParam('id');
+        $id = (int) $this->getEvent()->getRoute()->getParam('id');
         $table = new BooksTable();
-        $data  = $table->getBookArray($id);
+        $data = $table->getBookArray($id);
 
         if (empty($data)) {
             $this->getResponse()
@@ -83,13 +83,13 @@ class IndexController extends AbstractController
 
             // Converting the data structure
             $object = $table->getObjectMapper()->populate($data, BooksMaps::MAP_BOOK);
-            $data   = $table->getObjectMapper()->extract($object, BooksMaps::MAP_BOOK_DB_SAVE);
+            $data = $table->getObjectMapper()->extract($object, BooksMaps::MAP_BOOK_DB_SAVE);
 
             $table->saveArray($data, BooksMaps::MAP_BOOK_DB_SAVE);
         }
 
         $publishers = (new PublishersTable())->getPublishers();
-        $authors    = (new AuthorsTable())->getAuthors();
+        $authors = (new AuthorsTable())->getAuthors();
 
         return [
             'post' => $data,
@@ -100,8 +100,8 @@ class IndexController extends AbstractController
 
     public function deleteAction()
     {
-        $id     = (int) $this->getEvent()->getRoute()->getParam('id');
-        $table  = new BooksTable();
+        $id = (int) $this->getEvent()->getRoute()->getParam('id');
+        $table = new BooksTable();
         $object = $table->getBook($id);
 
         if ($object->getId() !== 0) {

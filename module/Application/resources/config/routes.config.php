@@ -7,34 +7,34 @@
  * @license https://github.com/brian978/Acamar-SkeletonApplication/blob/master/LICENSE New BSD License
  */
 
-return array(
-    'routes' => array(
-        'home' => array(
+return [
+    'routes' => [
+        'home' => [
             'pattern' => '/',
-            'defaults' => array(
+            'defaults' => [
                 'module' => 'Application',
                 'controller' => 'index',
                 'action' => 'index'
-            ),
-            'options' => array(
-                'acceptedHttpMethods' => array(
+            ],
+            'options' => [
+                'acceptedHttpMethods' => [
                     'GET'
-                )
-            ),
-        ),
-        'error' => array(
+                ]
+            ],
+        ],
+        'error' => [
             'pattern' => '/error',
-            'defaults' => array(
+            'defaults' => [
                 'module' => 'Application',
                 'controller' => 'error',
                 'action' => 'index'
-            )
-        ),
-        'mvc' => array(
+            ]
+        ],
+        'mvc' => [
             'pattern' => '/:controller(/:action(/:id))',
-            'defaults' => array(
+            'defaults' => [
                 'module' => 'Application'
-            )
-        )
-    )
-);
+            ]
+        ]
+    ]
+];

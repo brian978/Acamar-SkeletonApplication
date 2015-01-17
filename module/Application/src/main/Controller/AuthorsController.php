@@ -40,7 +40,7 @@ class AuthorsController extends AbstractController
 
         // We save the object
         if ($this->getRequest()->isPost()) {
-            $data  = array_merge($data, $this->getRequest()->getPost());
+            $data = array_merge($data, $this->getRequest()->getPost());
             $table = new AuthorsTable();
             $table->saveArray($data, AuthorsMaps::MAP_AUTHOR);
 
@@ -58,9 +58,9 @@ class AuthorsController extends AbstractController
 
     public function editAction()
     {
-        $id    = (int) $this->getEvent()->getRoute()->getParam('id');
+        $id = (int) $this->getEvent()->getRoute()->getParam('id');
         $table = new AuthorsTable();
-        $data  = $table->getAuthorArray($id);
+        $data = $table->getAuthorArray($id);
 
         if (empty($data)) {
             $this->getResponse()
@@ -83,8 +83,8 @@ class AuthorsController extends AbstractController
 
     public function deleteAction()
     {
-        $id     = (int) $this->getEvent()->getRoute()->getParam('id');
-        $table  = new AuthorsTable();
+        $id = (int) $this->getEvent()->getRoute()->getParam('id');
+        $table = new AuthorsTable();
         $object = $table->getAuthor($id);
 
         if ($object->getId() !== 0) {
