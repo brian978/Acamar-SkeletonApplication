@@ -7,10 +7,14 @@
  * @license https://github.com/brian978/Acamar-SkeletonApplication/blob/master/LICENSE New BSD License
  */
 
-return array(
-    'view' => array(
-        'paths' => array(
+return [
+    'view' => [
+        'paths' => [
             'Application' => dirname(__DIR__) . '/views'
-        )
-    )
-);
+        ],
+        // This is optional unless you don't want to use the layout/layout.phtml script as the layout for the module
+        'layout' => [
+            'Application' => 'layout/layout.phtml'
+        ]
+    ]
+];
