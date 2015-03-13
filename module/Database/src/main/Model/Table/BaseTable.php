@@ -56,6 +56,14 @@ abstract class BaseTable
     protected $queryFactory = null;
 
     /**
+     * The autodetect feature allows the table to determine things like the table name or, for the mappable tables,
+     * what is the map class that needs to be used
+     *
+     * @var bool
+     */
+    protected $autodetect = true;
+
+    /**
      * Sets the connection registry that will be used by the table models to query the database
      *
      * @param ConnectionRegistry $connectionRegistry

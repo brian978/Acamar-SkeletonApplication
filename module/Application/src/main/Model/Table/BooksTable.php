@@ -28,13 +28,6 @@ class BooksTable extends MappableBaseTable
     protected $tableName = 'books';
 
     /**
-     * The property must contain the class name that will be used to determine the mappings for the objects
-     *
-     * @var string
-     */
-    protected $tableMapsClass = 'Application\Model\Table\Maps\BooksMaps';
-
-    /**
      * Returns all the authors from the database
      *
      * @return array

@@ -28,13 +28,6 @@ class PublishersTable extends MappableBaseTable
     protected $tableName = 'publishers';
 
     /**
-     * The property must contain the class name that will be used to determine the mappings for the objects
-     *
-     * @var string
-     */
-    protected $tableMapsClass = 'Application\Model\Table\Maps\PublishersMaps';
-
-    /**
      * Returns all the publishers from the database
      *
      * @return array

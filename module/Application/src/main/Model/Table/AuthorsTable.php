@@ -28,13 +28,6 @@ class AuthorsTable extends MappableBaseTable
     protected $tableName = 'authors';
 
     /**
-     * The property must contain the class name that will be used to determine the mappings for the objects
-     *
-     * @var string
-     */
-    protected $tableMapsClass = 'Application\Model\Table\Maps\AuthorsMaps';
-
-    /**
      * Returns all the authors from the database
      *
      * @return array

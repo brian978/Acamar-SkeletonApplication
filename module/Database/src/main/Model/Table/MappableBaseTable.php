@@ -56,10 +56,45 @@ abstract class MappableBaseTable extends BaseTable
     protected function getTableMaps()
     {
         if (null === $this->tableMaps) {
+            if ("" === $this->tableMapsClass) {
+                if (!$this->autodetect) {
+                    throw new \RuntimeException("No maps class for the `" . get_class($this) . "` object was provided");
+                }
+
+                $this->detectTableMapsClass();
+            }
+
             $this->tableMaps = new $this->tableMapsClass;
         }
 
         return $this->tableMaps;
+    }
+
+    /**
+     * The method is used by the autodetect feature to determine what is the name of the class that contains the
+     * mappings specific to $this object
+     *
+     * @return void
+     */
+    private function detectTableMapsClass()
+    {
+        $class = get_class($this);
+        $classBaseNamespace = substr($class, 0, strrpos($class, "\\"));
+        $classWithoutPrefix = str_replace([$classBaseNamespace . "\\", "Table"], ["", ""], $class);
+
+        $this->tableMapsClass = $this->buildTableMapsClassName($classBaseNamespace, $classWithoutPrefix);
+    }
+
+    /**
+     * The method is used to make it easier to customize the name of the table maps class
+     *
+     * @param string $classBaseNamespace
+     * @param string $classWithoutPrefix
+     * @return string
+     */
+    protected function buildTableMapsClassName($classBaseNamespace, $classWithoutPrefix)
+    {
+        return $classBaseNamespace . "\\Maps\\" . $classWithoutPrefix . "Maps";
     }
 
     /**
