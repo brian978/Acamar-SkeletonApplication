@@ -43,6 +43,7 @@ abstract class BaseTable
 
     /**
      * The table name for the table that this object represents
+     * When the autodetect feature is used the table names are considered to be camel cased: someTableName
      *
      * @var string
      */
@@ -62,6 +63,72 @@ abstract class BaseTable
      * @var bool
      */
     protected $autodetect = true;
+
+    /**
+     * Used as a cache by the BaseTable::getClassNameDetails() method
+     *
+     * @var array
+     */
+    protected $classNameDetails = [];
+
+    /**
+     * Constructor for the BaseTable objects.
+     *
+     * It must be called with parent::__construct() to keep the autodetect features for the table name
+     *
+     */
+    public function __construct()
+    {
+        if ($this->autodetect && "" === $this->tableName) {
+            $this->detectTableName();
+        }
+    }
+
+    /**
+     * The method is used by the autodetect feature to determine the name of the table name for the class
+     *
+     * @return void
+     */
+    private function detectTableName()
+    {
+        list(, , $classWithoutPrefix) = $this->getClassNameDetails();
+
+        $this->tableName = $this->buildTableName($classWithoutPrefix);
+    }
+
+    /**
+     * The method is used to make it easier to customize the name of the table name when the autodetect feature is
+     * used
+     *
+     * @param string $classWithoutPrefix
+     * @return string
+     */
+    protected function buildTableName($classWithoutPrefix)
+    {
+        return lcfirst($classWithoutPrefix);
+    }
+
+    /**
+     * Returns different pieces of information from the class name (which includes the namespace)
+     *
+     * @return array
+     */
+    protected function getClassNameDetails()
+    {
+        if (empty($this->classNameDetails)) {
+            $class = get_class($this);
+            $classBaseNamespace = substr($class, 0, strrpos($class, "\\"));
+            $classWithoutPrefix = str_replace([$classBaseNamespace . "\\", "Table"], ["", ""], $class);
+
+            $this->classNameDetails = [
+                $class,
+                $classBaseNamespace,
+                $classWithoutPrefix
+            ];
+        }
+
+        return $this->classNameDetails;
+    }
 
     /**
      * Sets the connection registry that will be used by the table models to query the database

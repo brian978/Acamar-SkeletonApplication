@@ -86,15 +86,14 @@ abstract class MappableBaseTable extends BaseTable
      */
     private function detectTableMapsClass()
     {
-        $class = get_class($this);
-        $classBaseNamespace = substr($class, 0, strrpos($class, "\\"));
-        $classWithoutPrefix = str_replace([$classBaseNamespace . "\\", "Table"], ["", ""], $class);
+        list(, $classBaseNamespace, $classWithoutPrefix) = $this->getClassNameDetails();
 
         $this->tableMapsClass = $this->buildTableMapsClassName($classBaseNamespace, $classWithoutPrefix);
     }
 
     /**
-     * The method is used to make it easier to customize the name of the table maps class
+     * The method is used to make it easier to customize the name of the table maps class when the autodetect feature
+     * is used
      *
      * @param string $classBaseNamespace
      * @param string $classWithoutPrefix

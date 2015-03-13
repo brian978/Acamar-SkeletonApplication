@@ -21,13 +21,6 @@ use Database\Model\Table\MappableBaseTable;
 class BooksTable extends MappableBaseTable
 {
     /**
-     * The table name for the table that this object represents
-     *
-     * @var string
-     */
-    protected $tableName = 'books';
-
-    /**
      * Returns all the authors from the database
      *
      * @return array

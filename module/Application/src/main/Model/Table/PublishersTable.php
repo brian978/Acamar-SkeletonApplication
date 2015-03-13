@@ -21,13 +21,6 @@ use Database\Model\Table\MappableBaseTable;
 class PublishersTable extends MappableBaseTable
 {
     /**
-     * The table name for the table that this object represents
-     *
-     * @var string
-     */
-    protected $tableName = 'publishers';
-
-    /**
      * Returns all the publishers from the database
      *
      * @return array
