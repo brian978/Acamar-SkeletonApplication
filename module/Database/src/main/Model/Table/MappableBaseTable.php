@@ -10,6 +10,7 @@
 namespace Database\Model\Table;
 
 use Acamar\Model\Entity\EntityInterface;
+use Acamar\Model\Mapper\ObjectMapper;
 use Aura\SqlQuery\Common\InsertInterface;
 use Database\Model\Table\Components\MappableTable;
 
@@ -23,7 +24,9 @@ use Database\Model\Table\Components\MappableTable;
  */
 abstract class MappableBaseTable extends BaseTable
 {
-    use MappableTable;
+    use MappableTable {
+        getObjectMapper as parentGetObjectMapper;
+    }
 
     /**
      * The property must contain the class name that will be used to determine the mappings for the objects
@@ -40,12 +43,17 @@ abstract class MappableBaseTable extends BaseTable
     private $tableMaps = null;
 
     /**
-     * Constructs the object and initializes the ObjectMapper object
+     * Returns an object mapper that can be used to transform arrays to objects
      *
+     * @return ObjectMapper
      */
-    public function __construct()
+    public function getObjectMapper()
     {
-        $this->getObjectMapper($this->getTableMaps());
+        if (null === $this->objectMapper) {
+            $this->parentGetObjectMapper($this->getTableMaps());
+        }
+
+        return $this->objectMapper;
     }
 
     /**
